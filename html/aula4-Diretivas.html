@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- ng-app é o namespace da aplicação-->
+<html ng-app="mvcApp">
+<head>
+    <meta charset="UTF-8">
+    <title>MVC com Angular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+    <script src="../js/aula4-Diretivas.js"></script>
+</head>
+<!-- Definindo um controller responsável por essa aréa do HTML-->
+<body ng-controller="aula4Controller">
+<ul>
+    <!-- Diretiva ng-repeat é usada para iterar sobre o "array" -->
+    <li ng-repeat="state in states">{{state.name}} . {{state.capital}}</li>
+</ul>
+<form ng-submit="addState()" >
+    <input ng-model="estado" type="text" placeholder="Digite um Estado">
+    <input ng-model="capital" type="text" placeholder="Digite uma Capital">
+    <input type="submit" value="Incluir">
+</form>
+<p>
+    <!-- diretiva ng-model -->
+    Gostei
+    <input type="checkbox" ng-model="gostei">
+    <!-- diretiva ng-show -->
+    <span ng-show="gostei">Opaaa</span>
+    </p>
+<p>
+    Esconder
+    <input type="checkbox" ng-model="escondido"/>
+    <!-- diretiva ng-hide-->
+    <span ng-hide="escondido">Opaaa</span>
+</p>
+<!-- diretiva ng-click-->
+<button ng-click="incrementa()">Diretiva ng-click</button>
+<!-- diretiva ng-bind-->
+<p>Você clicou <span ng-bind="contador"></span> vezes no botão acima</p>
+</body>
+</html>
+

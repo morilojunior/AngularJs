@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="Router">
+<head>
+    <meta charset="UTF-8">
+    <title>Router</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+    <!-- lib necessária para a tradução -->
+    <script data-require="angular.js@1.2.x" src="http://code.angularjs.org/1.2.4/i18n/angular-locale_pt-br.js" ></script>
+    <script src="../js/aula10-Router.js"></script>
+    <script>
+        document.write('<base href="' + document.location + '" />');
+    </script>
+</head>
+<body ng-controller="controllerRouter">
+
+    <h1>Estados e capitais</h1>
+
+     <!-- Aqui são carregadas as views -->
+     <ng-view/>
+</body>
+</html>
+
+
+
