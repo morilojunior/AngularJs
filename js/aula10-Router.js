@@ -1,26 +1,31 @@
 
 //Para definir Rotas utilizamos o módulo 'ngRouter' como dependência
-var serviceApp = angular.module('Router', ['ngRouter']);
+var serviceApp = angular.module('Router', ['ngRoute']);
 
 
 //Defini as rotas da aplicação
-serviceApp.config(['$routeProvider',
-    function($routeProvider) {
+serviceApp.config(['$routeProvider', '$locationProvider',
+    function($routeProvider, $locationProvider) {
         $routeProvider.
-            when('/states', { templateUrl: '../html/list.html', controller: 'controllerRouter'}).
-            when('/create', { templateUrl: '../html/create.html', controller: 'controllerRouter'}).
-            when('/delete', { templateUrl: '../html/list.html', controller: 'controllerRouter'}).
+            when('/states', { templateUrl: '/html/aula10-List.html', controller: 'controllerRouter'}).
+            when('/create', { templateUrl: '/html/aula10-Create.html', controller: 'controllerRouter'}).
+            when('/delete', { templateUrl: '/html/aula10-List.html', controller: 'controllerRouter'}).
             otherwise({
                 redirectTo: '/states'
             });
+        $locationProvider.html5Mode(true);
     }
 ]);
 
-
+// habilita CORS
+serviceApp.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+}]);
 
 <!-- Defini um Serviço em que eu posso reutilizar entre os controles -->
 
-serviceApp.service('statesService', function($http){
+serviceApp.service('statesService', function($http, $rootScope){
 
     //private
     var states = {};
@@ -35,7 +40,7 @@ serviceApp.service('statesService', function($http){
     };
 
     this.addStateInToCollection = function(estado, capital, renda) {
-        states.push({
+        $rootScope.states.push({
             name: estado,
             capital: capital,
             renda: renda
@@ -71,11 +76,11 @@ serviceApp.controller('controllerRouter', function($scope, $location, statesServ
 
     $scope.addState = function(){
         statesService.addStateInToCollection($scope.estado, $scope.capital, 1000);
-        $location.path('#states'); //O location redireciona
+        $location.path('states'); //O location redireciona
     };
 
     $scope.deleteState = function(index) {
         statesService.removeStateFromCollection(index);
-        $location.path('#states');
+        $location.path('states');
     };
 });
